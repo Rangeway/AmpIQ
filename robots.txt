@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /tools.html
+Disallow: /calculator.html
+Disallow: /feeschedule.html
+Disallow: /one-pager.html
+Disallow: /proposal-generator.html
+Disallow: /proposal-template.html
+
+Sitemap: https://ampiq.tech/sitemap.xml
