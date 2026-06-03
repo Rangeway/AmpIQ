@@ -969,6 +969,151 @@ footer {
   color: var(--text-faint);
 }
 
+/* ---- Media (photography) ------------------------------------------------ */
+
+/* Framed photo: hairline border, rounded, with the gradient corner-tick. */
+.media {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--navy-1);
+  isolation: isolate;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 18px;
+  height: 18px;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-image: var(--grad) 1;
+  border-top-left-radius: var(--radius);
+}
+
+/* Duotone: desaturate the photo, then tint it through the brand gradient. */
+.media-duotone img {
+  filter: grayscale(1) contrast(1.04) brightness(0.94);
+}
+
+.media-duotone::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--grad);
+  mix-blend-mode: color;
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+/* Monospace caption pinned to the bottom of a framed photo. */
+.media-cap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 100%;
+  margin: 0;
+  padding: 1.4rem 1rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 247, 252, 0.92);
+  background: linear-gradient(to top, rgba(7, 13, 31, 0.82), transparent);
+}
+
+/* Full-bleed treated photo behind a section, kept legible with a navy wash. */
+.section.has-bg {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.section-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.section-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.55);
+}
+
+.section-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grad);
+  mix-blend-mode: color;
+  opacity: 0.5;
+}
+
+.section-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 13, 31, 0.82), rgba(7, 13, 31, 0.92));
+}
+
+/* Hero two-column: copy left, treated photo right. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: stretch;
+}
+
+.hero-media {
+  min-height: 400px;
+}
+
+/* Photo header inside a card, flush to the card edges. */
+.card-media {
+  position: relative;
+  height: 190px;
+  margin: calc(-1 * clamp(1.5rem, 2.4vw, 2rem)) calc(-1 * clamp(1.5rem, 2.4vw, 2rem)) clamp(1.25rem, 2vw, 1.6rem);
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease);
+}
+
+.card:hover .card-media img {
+  transform: scale(1.04);
+}
+
+/* Tesla teaser aside: framed photo over the checklist panel. */
+.tesla-aside {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.tesla-aside .media {
+  height: clamp(200px, 26vw, 300px);
+}
+
 /* ---- Motion ------------------------------------------------------------- */
 
 /* Scroll reveal: only hidden when JS is active (graceful no-JS fallback). */
@@ -1028,6 +1173,7 @@ footer {
 
 @media (max-width: 980px) {
   .heading,
+  .hero-grid,
   .orchestrator-grid,
   .split,
   .about-grid {
@@ -1036,6 +1182,10 @@ footer {
 
   .heading {
     align-items: start;
+  }
+
+  .hero-media {
+    min-height: 260px;
   }
 
   .qa {
