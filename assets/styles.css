@@ -1082,6 +1082,23 @@ footer {
   min-height: 400px;
 }
 
+/* Two stacked treated panels in a hero column. */
+.hero-media-duo {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.9rem;
+  min-height: 440px;
+}
+
+.hero-media-duo .media {
+  min-height: 0;
+}
+
+.hero-media-duo .media-cap {
+  letter-spacing: 0.14em;
+  padding: 1rem 0.8rem 0.6rem;
+}
+
 /* Photo header inside a card, flush to the card edges. */
 .card-media {
   position: relative;
@@ -1186,6 +1203,12 @@ footer {
 
   .hero-media {
     min-height: 260px;
+  }
+
+  .hero-media-duo {
+    grid-template-rows: none;
+    grid-template-columns: 1fr 1fr;
+    min-height: 220px;
   }
 
   .qa {
