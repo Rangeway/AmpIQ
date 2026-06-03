@@ -5,50 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>AmpIQ Tools</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #142B61;
-    --pink: #e84393;
-    --blue: #0984e3;
-    --bg: #f8f9fc;
-    --card-bg: #ffffff;
-    --text: #2d3748;
-    --text-muted: #718096;
-    --border: #e2e8f0;
-    --shadow: 0 1px 3px rgba(20,43,97,0.08), 0 4px 16px rgba(20,43,97,0.04);
-    --shadow-hover: 0 4px 12px rgba(20,43,97,0.12), 0 8px 32px rgba(20,43,97,0.06);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --text: #e2e8f0;
-      --text-muted: #94a3b8;
-      --border: #334155;
-      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
-      --shadow-hover: 0 4px 12px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.3);
-    }
+    --pink: #ED4E93;
+    --purple: #A855F7;
+    --blue: #3B82F6;
+    --navy: #070D1F;
+    --bg: #070D1F;
+    --gradient: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+    --card-bg: rgba(255,255,255,0.035);
+    --card-border: rgba(255,255,255,0.1);
+    --text: #f4f7fc;
+    --text-muted: rgba(244,247,252,0.66);
+    --text-faint: rgba(244,247,252,0.42);
+    --font-display: "Bricolage Grotesque", Georgia, serif;
+    --font-body: "Hanken Grotesk", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    -webkit-font-smoothing: antialiased;
   }
 
   .header {
     width: 100%;
-    background: linear-gradient(135deg, var(--pink), var(--blue));
-    padding: 2.5rem 1.5rem 2rem;
+    background:
+      radial-gradient(120% 140% at 50% 0%, rgba(168,85,247,0.18), transparent 60%),
+      var(--navy);
+    border-bottom: 1px solid var(--card-border);
+    padding: 2.75rem 1.5rem 2.25rem;
     text-align: center;
+    position: relative;
+  }
+
+  .header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--gradient);
+    opacity: 0.85;
   }
 
   .header img {
@@ -58,34 +66,46 @@
   }
 
   .header h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.35rem;
+    font-family: var(--font-display);
+    font-size: 1.45rem;
     font-weight: 700;
-    color: #fff;
-    letter-spacing: 0.02em;
+    color: var(--text);
+    letter-spacing: -0.01em;
   }
 
   .header p {
-    color: rgba(255,255,255,0.75);
+    color: var(--text-faint);
     font-size: 0.85rem;
-    margin-top: 0.35rem;
+    margin-top: 0.4rem;
   }
 
   .container {
     width: 100%;
     max-width: 640px;
-    padding: 2rem 1.5rem 3rem;
+    padding: 2.25rem 1.5rem 3rem;
   }
 
   .section-label {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-mono);
     font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-weight: 500;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 0.75rem;
+    color: var(--text-faint);
+    margin-bottom: 0.85rem;
     padding-left: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-label::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--gradient);
+    flex-shrink: 0;
   }
 
   .card-group {
@@ -96,30 +116,48 @@
   }
 
   a.card {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.25rem;
     background: var(--card-bg);
-    border: 1px solid var(--border);
+    border: 1px solid var(--card-border);
     border-radius: 10px;
-    box-shadow: var(--shadow);
     text-decoration: none;
     color: var(--text);
-    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+
+  /* gradient corner-tick, revealed on hover */
+  a.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    background: var(--gradient);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    opacity: 0;
+    transition: opacity 0.2s;
   }
 
   a.card:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-1px);
-    border-color: var(--pink);
+    transform: translateY(-2px);
+    border-color: rgba(237,78,147,0.55);
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 8px 28px rgba(7,13,31,0.5);
   }
+
+  a.card:hover::before { opacity: 1; }
 
   .card-icon {
     width: 40px;
     height: 40px;
     border-radius: 8px;
-    background: linear-gradient(135deg, var(--pink), var(--blue));
+    background: var(--gradient);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,45 +168,51 @@
   .card-body { flex: 1; min-width: 0; }
 
   .card-title {
+    font-family: var(--font-display);
     font-weight: 600;
     font-size: 0.95rem;
     line-height: 1.3;
+    color: var(--text);
   }
 
   .card-desc {
     font-size: 0.8rem;
     color: var(--text-muted);
-    margin-top: 0.15rem;
-    line-height: 1.4;
+    margin-top: 0.2rem;
+    line-height: 1.45;
   }
 
   .card-arrow {
-    color: var(--text-muted);
+    color: var(--text-faint);
     font-size: 1.1rem;
     flex-shrink: 0;
-    transition: transform 0.2s;
+    transition: transform 0.2s, color 0.2s;
   }
 
-  a.card:hover .card-arrow { transform: translateX(3px); }
+  a.card:hover .card-arrow {
+    transform: translateX(3px);
+    color: var(--text);
+  }
 
   .footer {
     text-align: center;
-    padding: 1rem;
+    padding: 1.25rem;
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: var(--text-faint);
   }
 
   .footer a {
-    color: var(--text-muted);
+    color: var(--text-faint);
     text-decoration: none;
+    transition: color 0.2s;
   }
-  .footer a:hover { text-decoration: underline; }
+  .footer a:hover { color: var(--text); text-decoration: underline; }
 </style>
 </head>
 <body>
 
   <div class="header">
-    <img src="https://ampiq.tech/logo-trans.png" alt="AmpIQ">
+    <img src="assets/ampiq-logo.png" alt="AmpIQ">
     <h1>Internal Tools</h1>
     <p>Documents and utilities for AmpIQ operations</p>
   </div>

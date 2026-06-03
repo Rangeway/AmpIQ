@@ -7,7 +7,7 @@
   <title>AmpIQ Project Calculator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,29 +15,44 @@
       --pink: #ED4E93;
       --purple: #A855F7;
       --blue: #3B82F6;
-      --navy: #142B61;
-      --deep: #1E2E4F;
-      --body: #4B5563;
-      --light: #F7F8FC;
-      --white: #FFFFFF;
-      --g100: #F3F4F6;
-      --g200: #E5E7EB;
-      --g300: #D1D5DB;
-      --g400: #9CA3AF;
+      /* Dark engineered-precision theme.
+         --navy now carries the LIGHT INK value so the many existing
+         `color: var(--navy)` text rules become light-on-dark automatically.
+         The true page base is --base. Element backgrounds that previously
+         used var(--navy) are remapped to dark surfaces in their own rules. */
+      --base: #070D1F;
+      --navy: #f4f7fc;
+      --deep: rgba(255,255,255,0.06);
+      --body: rgba(244,247,252,0.66);
+      --light: #070D1F;
+      --white: #f4f7fc;
+      --surface: rgba(255,255,255,0.035);
+      --surface-strong: rgba(255,255,255,0.06);
+      --line: rgba(255,255,255,0.1);
+      --line-strong: rgba(255,255,255,0.16);
+      --ink: #f4f7fc;
+      --muted: rgba(244,247,252,0.66);
+      --faint: rgba(244,247,252,0.42);
+      /* legacy gray tokens remapped onto the dark scale */
+      --g100: rgba(255,255,255,0.05);
+      --g200: rgba(255,255,255,0.1);
+      --g300: rgba(255,255,255,0.16);
+      --g400: rgba(244,247,252,0.42);
       --grad: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
       --grad-h: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
-      --fh: 'Montserrat', sans-serif;
-      --fb: 'Inter', sans-serif;
-      --card-shadow: 0 1px 3px rgba(11,26,59,0.06), 0 8px 24px rgba(11,26,59,0.04);
-      --card-hover: 0 4px 12px rgba(11,26,59,0.08), 0 16px 40px rgba(11,26,59,0.06);
+      --fh: 'Bricolage Grotesque', Georgia, serif;
+      --fb: 'Hanken Grotesk', system-ui, sans-serif;
+      --fm: 'IBM Plex Mono', ui-monospace, monospace;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.3);
+      --card-hover: 0 4px 12px rgba(0,0,0,0.5), 0 16px 40px rgba(0,0,0,0.4);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--fb);
-      color: var(--body);
-      background: var(--light);
+      color: var(--ink);
+      background: var(--base);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
@@ -45,8 +60,9 @@
 
     /* Top bar */
     .topbar {
-      background: var(--white);
-      border-bottom: 1px solid var(--g200);
+      background: rgba(7,13,31,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
       padding: 0.75rem 2rem;
       display: flex;
       align-items: center;
@@ -77,27 +93,27 @@
 
     .page-header { margin-bottom: 2rem; }
     .page-label {
-      font-family: var(--fh);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
+      font-family: var(--fm);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       background: var(--grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
     }
     .page-title {
       font-family: var(--fh);
       font-size: 1.75rem;
       font-weight: 800;
-      color: var(--navy);
+      color: var(--ink);
       margin-bottom: 0.4rem;
     }
     .page-desc {
       font-size: 0.92rem;
-      color: var(--g400);
+      color: var(--muted);
       max-width: 560px;
     }
 
@@ -111,13 +127,14 @@
 
     /* Cards */
     .card {
-      background: var(--white);
+      background: var(--surface);
       border-radius: 12px;
-      border: 1px solid var(--g200);
+      border: 1px solid var(--line);
       box-shadow: var(--card-shadow);
       overflow: hidden;
-      transition: box-shadow 0.25s;
+      transition: box-shadow 0.25s, border-color 0.25s;
     }
+    .card:hover { border-color: var(--line-strong); }
     .card:hover { box-shadow: var(--card-hover); }
     .card-header {
       padding: 1rem 1.25rem 0.75rem;
@@ -176,41 +193,42 @@
     input[type="number"] {
       width: 90px;
       padding: 0.4rem 0.5rem;
-      border: 1.5px solid var(--g200);
+      border: 1.5px solid var(--line-strong);
       border-radius: 6px;
-      font-family: var(--fb);
+      font-family: var(--fm);
       font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--navy);
+      font-weight: 500;
+      color: var(--ink);
       text-align: right;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
       -moz-appearance: textfield;
-      background: var(--white);
+      background: rgba(255,255,255,0.04);
     }
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
     input[type="number"]:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.28);
     }
     input.wide { width: 110px; }
 
     /* Select */
     select {
       padding: 0.4rem 0.5rem;
-      border: 1.5px solid var(--g200);
+      border: 1.5px solid var(--line-strong);
       border-radius: 6px;
       font-family: var(--fb);
       font-size: 0.82rem;
       font-weight: 600;
-      color: var(--navy);
-      background: var(--white);
+      color: var(--ink);
+      background: rgba(255,255,255,0.04);
       outline: none;
       cursor: pointer;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    select:focus { border-color: var(--blue); }
+    select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.28); }
+    select option { background: #0d1428; color: var(--ink); }
 
     /* Result cards */
     .results-strip {
@@ -220,43 +238,53 @@
       margin-bottom: 1.5rem;
     }
     .result-card {
-      background: var(--white);
+      background: var(--surface);
       border-radius: 10px;
-      border: 1px solid var(--g200);
+      border: 1px solid var(--line);
       padding: 1rem 1.15rem;
       box-shadow: var(--card-shadow);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
     .result-card:hover {
       transform: translateY(-2px);
       box-shadow: var(--card-hover);
+      border-color: var(--line-strong);
     }
     .result-card.highlight {
-      background: var(--navy);
-      border-color: transparent;
+      background:
+        linear-gradient(135deg, rgba(237,78,147,0.16), rgba(168,85,247,0.12), rgba(59,130,246,0.12)),
+        var(--surface-strong);
+      border-color: rgba(237,78,147,0.4);
     }
     .result-label {
-      font-size: 0.7rem;
-      font-weight: 600;
+      font-family: var(--fm);
+      font-size: 0.68rem;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--g400);
-      margin-bottom: 0.3rem;
+      letter-spacing: 0.14em;
+      color: var(--faint);
+      margin-bottom: 0.35rem;
     }
-    .highlight .result-label { color: rgba(255,255,255,0.5); }
+    .highlight .result-label { color: var(--muted); }
     .result-value {
       font-family: var(--fh);
       font-size: 1.4rem;
       font-weight: 800;
-      color: var(--navy);
+      color: var(--ink);
     }
-    .highlight .result-value { color: var(--white); }
+    .highlight .result-value {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .result-sub {
-      font-size: 0.72rem;
-      color: var(--g400);
-      margin-top: 0.15rem;
+      font-family: var(--fm);
+      font-size: 0.7rem;
+      color: var(--faint);
+      margin-top: 0.2rem;
     }
-    .highlight .result-sub { color: rgba(255,255,255,0.4); }
+    .highlight .result-sub { color: var(--muted); }
 
     /* Revenue breakdown */
     .breakdown { margin-bottom: 1.5rem; }
@@ -271,27 +299,33 @@
     }
     .breakdown-row:last-child { border-bottom: none; }
     .breakdown-row.total {
-      border-top: 2px solid var(--navy);
+      border-top: 2px solid var(--line-strong);
       border-bottom: none;
       margin-top: 0.25rem;
       padding-top: 0.75rem;
     }
     .breakdown-label {
       font-size: 0.85rem;
-      color: var(--body);
+      color: var(--muted);
     }
     .breakdown-row.total .breakdown-label {
       font-weight: 700;
-      color: var(--navy);
+      color: var(--ink);
     }
     .breakdown-value {
-      font-family: var(--fh);
+      font-family: var(--fm);
       font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--navy);
+      font-weight: 500;
+      color: var(--ink);
     }
     .breakdown-row.total .breakdown-value {
-      font-size: 1.05rem;
+      font-family: var(--fh);
+      font-size: 1.15rem;
+      font-weight: 800;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     /* Management scenario table */
@@ -302,40 +336,56 @@
       margin-top: 0.5rem;
     }
     .scenario-table th {
-      background: var(--navy);
-      color: var(--white);
-      font-family: var(--fh);
-      font-weight: 600;
-      font-size: 0.72rem;
+      background: var(--surface-strong);
+      color: var(--muted);
+      font-family: var(--fm);
+      font-weight: 500;
+      font-size: 0.68rem;
+      text-transform: uppercase;
       padding: 0.55rem 0.6rem;
       text-align: right;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid var(--line-strong);
     }
     .scenario-table th:first-child { text-align: left; border-radius: 6px 0 0 0; }
     .scenario-table th:last-child { border-radius: 0 6px 0 0; }
     .scenario-table td {
       padding: 0.45rem 0.6rem;
-      border-bottom: 1px solid var(--g200);
+      border-bottom: 1px solid var(--line);
       text-align: right;
-      font-weight: 500;
-      color: var(--body);
+      font-family: var(--fm);
+      font-weight: 400;
+      color: var(--muted);
     }
     .scenario-table td:first-child {
       text-align: left;
+      font-family: var(--fb);
       font-weight: 600;
-      color: var(--navy);
+      color: var(--ink);
     }
-    .scenario-table tr:nth-child(even) td { background: var(--g100); }
+    .scenario-table tr:nth-child(even) td { background: rgba(255,255,255,0.025); }
     .scenario-table td.active {
-      background: #EEF2FF;
-      font-weight: 700;
-      color: var(--navy);
+      background: rgba(237,78,147,0.14);
+      font-weight: 500;
+      color: var(--ink);
     }
-    .scenario-table tr:nth-child(even) td.active { background: #E0E7FF; }
+    .scenario-table tr:nth-child(even) td.active { background: rgba(237,78,147,0.2); }
+    /* JS writes an inline `color: var(--navy)` on the annual (last) column.
+       Override it with higher specificity so it stays light on the dark base. */
+    #scenario-body td:last-child {
+      color: var(--ink) !important;
+      font-weight: 600;
+    }
+    #scenario-body td:last-child.active {
+      background: rgba(237,78,147,0.2);
+    }
 
     /* Footer CTA */
     .footer-cta {
-      background: var(--navy);
+      background:
+        linear-gradient(135deg, rgba(237,78,147,0.1), rgba(168,85,247,0.06), rgba(59,130,246,0.08)),
+        var(--surface-strong);
+      border: 1px solid var(--line);
       border-radius: 12px;
       padding: 1.75rem 2rem;
       display: flex;
@@ -348,12 +398,12 @@
       font-family: var(--fh);
       font-size: 1rem;
       font-weight: 700;
-      color: var(--white);
+      color: var(--ink);
       margin-bottom: 0.2rem;
     }
     .footer-cta p {
       font-size: 0.82rem;
-      color: rgba(255,255,255,0.5);
+      color: var(--muted);
     }
     .footer-cta a {
       padding: 0.65rem 1.5rem;
@@ -722,7 +772,25 @@
       $('scenario-body').innerHTML = html;
     }
 
-    // Tier select auto-fills defaults
-    $('mgmt-tier').addEventListener('change', function() {
+    // Tier select auto-fills defaults, then recalculates
+    $('mgmt-tier').addEventListener('change', function () {
       const d = tierDefaults[this.value];
-      $('rev-share').value = d.sha
+      $('rev-share').value = d.share;
+      $('monthly-min').value = d.min;
+      calculate();
+    });
+
+    // Recompute live as any input changes
+    [
+      'l2-count', 'l3-count', 'l2-cost', 'l3-cost', 'consulting-fee',
+      'l2-markup', 'l3-markup', 'sw-cost', 'sw-markup',
+      'monthly-rev', 'rev-share', 'monthly-min'
+    ].forEach(function (id) {
+      $(id).addEventListener('input', calculate);
+    });
+
+    // Initial render
+    calculate();
+  </script>
+</body>
+</html>

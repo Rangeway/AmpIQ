@@ -7,28 +7,37 @@
   <title>AmpIQ Proposal Generator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --pink: #ED4E93; --purple: #A855F7; --blue: #3B82F6;
-      --navy: #142B61; --deep: #1E2E4F; --body: #4B5563;
+      /* Dark engineered-precision chrome */
+      --navy: #070D1F;
+      --surface: rgba(255,255,255,0.035);
+      --hairline: rgba(255,255,255,0.1);
+      --ink-on-dark: #f4f7fc;
+      --muted-on-dark: rgba(244,247,252,0.66);
+      /* Light preview document */
+      --ink: #0E1630; --deep: #1E2E4F; --body: #4B5563;
       --light: #F7F8FC; --white: #FFFFFF;
       --g100: #F3F4F6; --g200: #E5E7EB; --g300: #D1D5DB; --g400: #9CA3AF;
       --green: #10B981; --green-bg: #ECFDF5;
       --grad: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
       --grad-h: linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
-      --fh: 'Montserrat', sans-serif; --fb: 'Inter', sans-serif;
+      --font-display: "Bricolage Grotesque", Georgia, serif;
+      --font-body: "Hanken Grotesk", system-ui, sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
     }
-    body { font-family: var(--fb); color: var(--body); background: var(--light); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    body { font-family: var(--font-body); color: var(--ink-on-dark); background: var(--navy); -webkit-font-smoothing: antialiased; line-height: 1.6; }
 
     /* TOPBAR */
     .topbar {
-      background: var(--white); border-bottom: 1px solid var(--g200);
+      background: var(--navy); border-bottom: 1px solid var(--hairline);
       padding: 0.75rem 2rem; display: flex; align-items: center; justify-content: space-between;
     }
     .topbar img { height: 28px; }
-    .topbar span { font-family: var(--fh); font-size: 0.78rem; font-weight: 600; color: var(--g400); }
+    .topbar span { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-on-dark); }
 
     /* LAYOUT */
     .app { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 380px 1fr; gap: 2rem; min-height: calc(100vh - 56px); }
@@ -36,50 +45,54 @@
     /* SIDEBAR / FORM */
     .sidebar { position: sticky; top: 2rem; align-self: start; }
     .form-card {
-      background: var(--white); border-radius: 12px; border: 1px solid var(--g200);
-      box-shadow: 0 1px 3px rgba(11,26,59,0.06), 0 8px 24px rgba(11,26,59,0.04);
+      background: var(--surface); border-radius: 12px; border: 1px solid var(--hairline);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
       overflow: hidden;
     }
     .form-header {
-      padding: 1rem 1.25rem; background: var(--navy);
+      padding: 1rem 1.25rem; background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid var(--hairline);
       display: flex; align-items: center; gap: 0.6rem;
     }
-    .form-header h2 { font-family: var(--fh); font-size: 0.9rem; font-weight: 700; color: var(--white); }
+    .form-header h2 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--ink-on-dark); }
     .form-body { padding: 1.25rem; max-height: calc(100vh - 180px); overflow-y: auto; }
 
     .field { margin-bottom: 1rem; }
     .field:last-child { margin-bottom: 0; }
     .field label {
-      display: block; font-size: 0.75rem; font-weight: 600;
-      color: var(--navy); margin-bottom: 0.25rem; font-family: var(--fh);
+      display: block; font-size: 0.66rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted-on-dark); margin-bottom: 0.3rem; font-family: var(--font-mono);
     }
     .field input, .field select, .field textarea {
       width: 100%; padding: 0.5rem 0.65rem;
-      border: 1.5px solid var(--g200); border-radius: 6px;
-      font-family: var(--fb); font-size: 0.85rem; color: var(--navy);
-      outline: none; background: var(--white); transition: border-color 0.2s;
+      border: 1px solid var(--hairline); border-radius: 6px;
+      font-family: var(--font-body); font-size: 0.85rem; color: var(--ink-on-dark);
+      outline: none; background: rgba(255,255,255,0.04); transition: border-color 0.2s, box-shadow 0.2s;
     }
+    .field select option { color: #0E1630; background: #ffffff; }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(244,247,252,0.32); }
     .field input:focus, .field select:focus, .field textarea:focus {
-      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+      border-color: var(--pink); box-shadow: 0 0 0 3px rgba(237,78,147,0.18);
     }
     .field textarea { resize: vertical; min-height: 60px; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-    .field-hint { font-size: 0.7rem; color: var(--g400); margin-top: 0.15rem; }
+    .field-hint { font-size: 0.7rem; color: var(--muted-on-dark); margin-top: 0.15rem; }
 
     .divider {
-      border: none; border-top: 1px solid var(--g200);
-      margin: 1rem 0; 
+      border: none; border-top: 1px solid var(--hairline);
+      margin: 1rem 0;
     }
     .divider-label {
-      font-family: var(--fh); font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
+      font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--pink); margin-bottom: 0.75rem;
     }
 
     .gen-btn {
       width: 100%; padding: 0.75rem;
-      background: var(--grad); color: var(--white);
-      font-family: var(--fh); font-weight: 700; font-size: 0.88rem;
+      background: var(--grad); color: #ffffff;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.9rem;
       border: none; border-radius: 8px; cursor: pointer;
       margin-top: 1rem; transition: transform 0.2s, box-shadow 0.2s;
     }
@@ -87,82 +100,86 @@
 
     /* PREVIEW */
     .preview-area {
-      background: var(--white); border-radius: 12px; border: 1px solid var(--g200);
-      box-shadow: 0 1px 3px rgba(11,26,59,0.06), 0 8px 24px rgba(11,26,59,0.04);
+      background: var(--surface); border-radius: 12px; border: 1px solid var(--hairline);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
       overflow: hidden;
     }
     .preview-toolbar {
-      padding: 0.75rem 1.25rem; background: var(--g100); border-bottom: 1px solid var(--g200);
+      padding: 0.75rem 1.25rem; background: rgba(255,255,255,0.05); border-bottom: 1px solid var(--hairline);
       display: flex; align-items: center; justify-content: space-between;
     }
-    .preview-toolbar span { font-family: var(--fh); font-size: 0.78rem; font-weight: 600; color: var(--navy); }
+    .preview-toolbar span { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-on-dark); }
     .toolbar-actions { display: flex; gap: 0.5rem; }
     .toolbar-btn {
-      padding: 0.4rem 0.85rem; border: 1.5px solid var(--g200); border-radius: 6px;
-      background: var(--white); font-family: var(--fh); font-size: 0.72rem;
-      font-weight: 600; color: var(--navy); cursor: pointer; transition: 0.2s;
+      padding: 0.4rem 0.85rem; border: 1px solid var(--hairline); border-radius: 6px;
+      background: rgba(255,255,255,0.04); font-family: var(--font-mono); font-size: 0.7rem;
+      letter-spacing: 0.04em; font-weight: 500; color: var(--ink-on-dark); cursor: pointer; transition: 0.2s;
     }
-    .toolbar-btn:hover { border-color: var(--blue); color: var(--blue); }
-    .toolbar-btn.primary { background: var(--navy); color: var(--white); border-color: var(--navy); }
-    .toolbar-btn.primary:hover { background: var(--deep); }
+    .toolbar-btn:hover { border-color: var(--pink); color: #fff; }
+    .toolbar-btn.primary { background: var(--grad); color: #fff; border-color: transparent; }
+    .toolbar-btn.primary:hover { box-shadow: 0 4px 16px rgba(237,78,147,0.3); }
 
+    /* The preview FRAME is the light client-facing document */
     .preview-frame {
       padding: 2.5rem;
       min-height: 500px;
+      background: var(--white);
+      color: var(--body);
     }
 
-    /* PROPOSAL STYLES (inside preview) */
+    /* PROPOSAL STYLES (inside preview) — stays LIGHT, print-friendly client document */
     .prop-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
     .prop-header img { height: 32px; }
     .prop-contact { text-align: right; font-size: 0.72rem; color: var(--g400); line-height: 1.5; }
-    .prop-title { font-family: var(--fh); font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 0.2rem; }
+    .prop-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--ink); margin-bottom: 0.2rem; }
     .prop-sub { font-size: 0.92rem; color: var(--g400); margin-bottom: 0.35rem; }
     .prop-rule { height: 3px; background: var(--grad-h); border: none; border-radius: 2px; margin: 0.75rem 0 1.25rem; }
     .prop-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .prop-meta-label { font-family: var(--fh); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.05rem; }
+    .prop-meta-label { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.05rem; }
     .prop-meta-val { font-size: 0.82rem; color: var(--body); }
 
     .prop-sec-label {
-      font-family: var(--fh); font-size: 0.58rem; font-weight: 700;
+      font-family: var(--font-mono); font-size: 0.58rem; font-weight: 500;
       letter-spacing: 0.14em; text-transform: uppercase;
       background: var(--grad); -webkit-background-clip: text;
       -webkit-text-fill-color: transparent; background-clip: text;
       margin: 1.75rem 0 0.2rem;
     }
-    .prop-sec-title { font-family: var(--fh); font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
-    .prop-p { font-size: 0.82rem; line-height: 1.75; margin-bottom: 0.6rem; color: var(--body); }
+    .prop-sec-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 800; color: var(--ink); margin-bottom: 0.4rem; }
+    .prop-p { font-family: var(--font-body); font-size: 0.82rem; line-height: 1.75; margin-bottom: 0.6rem; color: var(--body); }
 
     .prop-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin: 0.75rem 0; }
     .prop-table th {
-      background: var(--navy); color: var(--white);
-      font-family: var(--fh); font-weight: 600; font-size: 0.68rem;
+      background: var(--ink); color: var(--white);
+      font-family: var(--font-mono); font-weight: 500; font-size: 0.66rem;
+      letter-spacing: 0.04em; text-transform: uppercase;
       padding: 0.45rem 0.55rem; text-align: left;
     }
     .prop-table th:first-child { border-radius: 5px 0 0 0; }
     .prop-table th:last-child { border-radius: 0 5px 0 0; }
     .prop-table td { padding: 0.4rem 0.55rem; border-bottom: 1px solid var(--g200); vertical-align: top; }
     .prop-table tr:nth-child(even) td { background: var(--g100); }
-    .prop-table .row-label { font-weight: 600; color: var(--navy); }
+    .prop-table .row-label { font-weight: 600; color: var(--ink); }
     .prop-table .row-val { font-weight: 600; color: var(--deep); }
-    .prop-table .row-total td { border-top: 2px solid var(--navy); font-weight: 700; color: var(--navy); font-family: var(--fh); }
-    .prop-table .row-hl td { background: #EEF2FF !important; }
+    .prop-table .row-total td { border-top: 2px solid var(--ink); font-weight: 700; color: var(--ink); font-family: var(--font-display); }
+    .prop-table .row-hl td { background: #FCEAF2 !important; }
 
     .prop-callout {
-      background: var(--light); border-left: 3px solid var(--blue);
+      background: var(--light); border-left: 3px solid var(--pink);
       border-radius: 0 8px 8px 0; padding: 0.65rem 0.9rem;
       margin: 0.75rem 0; font-size: 0.8rem; line-height: 1.6;
     }
-    .prop-callout strong { color: var(--navy); }
+    .prop-callout strong { color: var(--ink); }
 
     .prop-cta {
-      background: var(--navy); border-radius: 10px; padding: 1.25rem 1.5rem;
+      background: var(--ink); border-radius: 10px; padding: 1.25rem 1.5rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin: 1.5rem 0 1rem;
     }
-    .prop-cta h3 { font-family: var(--fh); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.1rem; }
+    .prop-cta h3 { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; color: var(--white); margin-bottom: 0.1rem; }
     .prop-cta p { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
     .prop-cta a {
       padding: 0.5rem 1.2rem; background: var(--grad); color: var(--white);
-      font-family: var(--fh); font-weight: 700; font-size: 0.75rem;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.75rem;
       border-radius: 6px; text-decoration: none; white-space: nowrap;
     }
 
@@ -171,13 +188,14 @@
       display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--g400);
     }
 
+    /* Empty state lives inside the light preview frame */
     .empty-state {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       min-height: 400px; text-align: center; color: var(--g400);
     }
     .empty-state svg { width: 48px; height: 48px; margin-bottom: 1rem; color: var(--g300); }
-    .empty-state h3 { font-family: var(--fh); font-size: 1rem; color: var(--navy); margin-bottom: 0.35rem; }
-    .empty-state p { font-size: 0.85rem; max-width: 320px; }
+    .empty-state h3 { font-family: var(--font-display); font-size: 1rem; color: var(--ink); margin-bottom: 0.35rem; }
+    .empty-state p { font-family: var(--font-body); font-size: 0.85rem; max-width: 320px; }
 
     @media (max-width: 860px) {
       .app { grid-template-columns: 1fr; }
