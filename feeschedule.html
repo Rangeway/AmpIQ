@@ -177,6 +177,9 @@
       color: var(--deep);
       white-space: nowrap;
     }
+    /* Keep the Term column's short phrases from breaking mid-word */
+    .mgmt-table th:nth-child(5),
+    .mgmt-table td:nth-child(5) { white-space: nowrap; }
 
     .table-note {
       font-size: 0.82rem;
@@ -471,7 +474,7 @@
     <h2 class="section-title">Ongoing Network Management</h2>
     <p class="section-desc">For clients who want AmpIQ to manage their charging network after installation, we offer three tiers of service. AmpIQ earns a percentage of gross charging revenue, subject to a monthly minimum per site. You pay whichever amount is greater.</p>
 
-    <table>
+    <table class="mgmt-table">
       <thead>
         <tr>
           <th>Tier</th>
