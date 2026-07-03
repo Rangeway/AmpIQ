@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AmpIQ — shared design system
+   AmpIQ, shared design system
    "Engineered precision": dark-dominant navy base, blueprint hairlines,
    monospace measurement labels, the pink-to-blue gradient as a charged accent.
    Single source of truth across index, incentives, and tesla pages.
@@ -1254,7 +1254,7 @@ footer {
   }
 }
 
-/* FAQ accordion — built from existing tokens */
+/* FAQ accordion, built from existing tokens */
 .faq {
   border-top: 1px solid var(--line);
   margin-top: 2.4rem;

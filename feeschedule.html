@@ -300,7 +300,8 @@
       .doc-header { flex-direction: column; gap: 0.75rem; }
       .doc-header-right { text-align: left; }
       .doc-title { font-size: 1.7rem; }
-      table { font-size: 0.78rem; }
+      body { overflow-x: hidden; }
+      table { font-size: 0.78rem; display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
       thead th, tbody td { padding: 0.5rem; }
       .cta-block { flex-direction: column; text-align: center; padding: 1.5rem; }
       .doc-footer { flex-direction: column; gap: 0.75rem; }
@@ -431,7 +432,6 @@
         <tr>
           <th>Category</th>
           <th>Typical Client Cost</th>
-          <th>AmpIQ Markup</th>
           <th>Notes</th>
         </tr>
       </thead>
@@ -439,31 +439,26 @@
         <tr>
           <td class="svc-name">L2 Charger (per unit)</td>
           <td class="fee-range">$600 - $2,500</td>
-          <td>15 - 20%</td>
           <td>Varies by make/model, smart vs. basic, networked vs. non-networked</td>
         </tr>
         <tr>
           <td class="svc-name">L3/DCFC (per unit)</td>
           <td class="fee-range">$30,000 - $150,000</td>
-          <td>8 - 12%</td>
-          <td>Higher unit cost supports lower percentage with strong dollar margin</td>
+          <td>Priced per unit by power output and site requirements</td>
         </tr>
         <tr>
           <td class="svc-name">Networking Software</td>
           <td class="fee-range">$200 - $500/port/yr</td>
-          <td>10 - 15%</td>
           <td>Annual recurring; platform management included</td>
         </tr>
         <tr>
           <td class="svc-name">Cable Mgmt & Pedestal</td>
           <td class="fee-range">$500 - $3,000</td>
-          <td>15 - 20%</td>
           <td>Site-specific accessories and mounting solutions</td>
         </tr>
         <tr>
           <td class="svc-name">Signage & Wayfinding</td>
           <td class="fee-range">$200 - $1,500</td>
-          <td>15 - 20%</td>
           <td>ADA-compliant signage packages</td>
         </tr>
       </tbody>
@@ -520,7 +515,7 @@
   <div class="section">
     <div class="section-label">Scope</div>
     <h2 class="section-title">What's Not Included</h2>
-    <p class="section-desc">The following costs are separate from AmpIQ consulting fees and are passed through at cost or with standard markup as noted above.</p>
+    <p class="section-desc">The following costs are separate from AmpIQ consulting fees and are passed through at cost.</p>
 
     <ul class="exclusion-list">
       <li>Electrical contractor labor and materials (installation)</li>
@@ -594,7 +589,7 @@
       <h3>Ready to explore EV charging for your property?</h3>
       <p>Book a complimentary discovery call. We'll learn about your project and outline next steps.</p>
     </div>
-    <a href="https://cal.com/zakwinnick/ampiq" target="_blank" rel="noopener" class="cta-btn">Schedule a Call</a>
+    <a href="https://cal.com/zakwinnick/ampiq" target="_blank" rel="noopener" class="cta-btn">Schedule a call</a>
   </div>
 
   <!-- FOOTER -->
