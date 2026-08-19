@@ -6,5 +6,8 @@ Disallow: /feeschedule.html
 Disallow: /one-pager.html
 Disallow: /proposal-generator.html
 Disallow: /proposal-template.html
+Disallow: /sample-site-screen.html
+Disallow: /site-screen-brief.html
+Disallow: /broker-referral-sheet.html
 
 Sitemap: https://ampiq.tech/sitemap.xml

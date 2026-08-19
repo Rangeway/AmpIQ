@@ -111,6 +111,9 @@ button { font: inherit; }
 .service__number, .principle__number { color: var(--accent); font-size: .9375rem; font-weight: 500; letter-spacing: .06em; }
 .service h3, .principle h3 { margin: 0 0 .75rem; font-size: 1.625rem; font-weight: 500; letter-spacing: -.03em; line-height: 1.15; }
 .service p, .principle p, .question p { margin: 0; color: var(--ink-soft); font-size: .9375rem; line-height: 1.65; }
+.service__link { display: inline-flex; gap: .5rem; margin-top: 1rem; color: var(--ink); font-size: .8125rem; font-weight: 600; line-height: 1.2; }
+.service__link span { color: var(--accent); transition: transform .2s ease; }
+.service__link:hover span { transform: translateX(4px); }
 
 .question-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.5rem 5rem; }
 .question h3 { max-width: 22rem; margin: 0 0 1.25rem; font-size: clamp(1.6rem, 2.3vw, 1.875rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.18; }
@@ -153,6 +156,36 @@ button { font: inherit; }
 .three-up__number { margin-bottom: 1.25rem; color: var(--accent); font-size: .875rem; font-weight: 500; letter-spacing: .06em; }
 .three-up h3 { margin: 0 0 1rem; font-size: 1.625rem; font-weight: 500; letter-spacing: -.03em; line-height: 1.2; }
 .three-up p { max-width: 30rem; margin: 0; color: var(--ink-soft); font-size: .9375rem; line-height: 1.65; }
+
+/* Pre-acquisition site screen. HERO: a decision ledger makes the offer feel like a real project instrument. */
+.decision-ledger { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 4rem; border-top: 1px solid var(--white-line); border-bottom: 1px solid var(--white-line); }
+.decision-ledger__item { padding: 1.25rem 1.25rem 1.4rem 0; }
+.decision-ledger__item + .decision-ledger__item { padding-left: 1.25rem; border-left: 1px solid var(--white-line); }
+.decision-ledger__label { display: block; color: rgba(255,255,255,.54); font-size: .625rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.decision-ledger__value { display: block; margin-top: .45rem; color: #fff; font-size: 1.05rem; font-weight: 500; letter-spacing: -.02em; line-height: 1.25; }
+.decision-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.decision-card { min-height: 240px; padding: 2.1rem 2.35rem 2.4rem 0; border-bottom: 1px solid var(--line); }
+.decision-card:nth-child(even) { padding-right: 0; padding-left: 2.35rem; border-left: 1px solid var(--line); }
+.decision-card__number { margin-bottom: 1.25rem; color: var(--accent); font-size: .75rem; font-weight: 600; letter-spacing: .13em; }
+.decision-card h3 { margin: 0 0 .75rem; font-size: clamp(1.55rem, 2.2vw, 2rem); font-weight: 500; letter-spacing: -.04em; line-height: 1.1; }
+.decision-card p { max-width: 29rem; margin: 0; color: var(--ink-soft); font-size: .9375rem; line-height: 1.65; }
+.scope-split { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
+.scope-split__cell { padding: clamp(2.25rem, 4vw, 3.6rem); }
+.scope-split__cell + .scope-split__cell { border-left: 1px solid var(--line); background: var(--paper-alt); }
+.scope-split h3 { margin: 0 0 1.25rem; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500; letter-spacing: -.045em; line-height: 1; }
+.scope-list { margin: 0; padding: 0; list-style: none; }
+.scope-list li { display: grid; grid-template-columns: 1.2rem 1fr; gap: .75rem; padding: .7rem 0; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .9375rem; line-height: 1.45; }
+.scope-list li::before { content: "↗"; color: var(--accent); font-weight: 600; }
+.scope-list--not li::before { content: "×"; color: var(--ink-mute); }
+.process-rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--white-line); }
+.process-rail article { min-height: 245px; padding: 1.75rem 1.5rem 1rem 0; border-bottom: 1px solid var(--white-line); }
+.process-rail article + article { padding-left: 1.5rem; border-left: 1px solid var(--white-line); }
+.process-rail__number { color: var(--accent); font-size: .75rem; font-weight: 600; letter-spacing: .13em; }
+.process-rail h3 { margin: 2.5rem 0 .75rem; color: #fff; font-size: 1.5rem; font-weight: 500; letter-spacing: -.035em; line-height: 1.1; }
+.process-rail p { margin: 0; color: var(--white-soft); font-size: .875rem; line-height: 1.6; }
+.decision-outcome { max-width: 67rem; padding: clamp(2rem, 5vw, 4.5rem); background: var(--ink); color: #fff; }
+.decision-outcome .kicker { color: rgba(255,255,255,.56); }
+.decision-outcome p { max-width: 47rem; margin: 1.5rem 0 0; color: var(--white-soft); font-size: clamp(1.1rem, 1.55vw, 1.3rem); line-height: 1.55; }
 
 /* Tesla */
 .dual-copy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: var(--paper); }
@@ -207,6 +240,12 @@ button { font: inherit; }
   .fit-grid article:first-child { border-right: 0; border-bottom: 1px solid var(--line); }
   .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 1.5rem; }
   .footer-brand { grid-column: 1 / -1; }
+  .decision-ledger, .process-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .decision-ledger__item:nth-child(3), .process-rail article:nth-child(3) { border-left: 0; }
+  .decision-ledger__item:nth-child(n + 3), .process-rail article:nth-child(n + 3) { border-top: 1px solid var(--white-line); }
+  .decision-card { min-height: 0; }
+  .scope-split { grid-template-columns: 1fr; }
+  .scope-split__cell + .scope-split__cell { border-top: 1px solid var(--line); border-left: 0; }
 }
 
 @media (max-width: 540px) {
@@ -221,6 +260,10 @@ button { font: inherit; }
   .quote { font-size: clamp(2.45rem, 11vw, 3.3rem); }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; }
+  .decision-ledger, .decision-grid, .process-rail { grid-template-columns: 1fr; }
+  .decision-ledger__item, .decision-ledger__item + .decision-ledger__item, .process-rail article, .process-rail article + article, .decision-ledger__item:nth-child(3), .process-rail article:nth-child(3) { padding-right: 0; padding-left: 0; border-left: 0; }
+  .decision-ledger__item + .decision-ledger__item, .process-rail article + article { border-top: 1px solid var(--white-line); }
+  .decision-card:nth-child(even) { padding-right: 0; padding-left: 0; border-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
